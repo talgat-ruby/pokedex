@@ -27,6 +27,9 @@
 		"koa-send": "^4.1.2",
 		"koa-static": "^4.0.2",
 		"node-fetch": "^1.7.3",
+		"passport": "^0.4.0",
+		"passport-facebook": "^2.1.1",
+		"passport-twitter": "^1.0.4",
 		"pokedex-promise-v2": "^3.1.1"
 	},
 	"devDependencies": {

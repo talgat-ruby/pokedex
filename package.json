@@ -13,5 +13,6 @@
     "pokemon"
   ],
   "author": "Talgat Saribayev",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
