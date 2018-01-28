@@ -1,0 +1,17 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex app build with GraphQl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "graphql",
+    "pokedex",
+    "pokemon"
+  ],
+  "author": "Talgat Saribayev",
+  "license": "MIT"
+}
