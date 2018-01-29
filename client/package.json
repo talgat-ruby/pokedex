@@ -1,22 +1,24 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "antd": "^3.1.6",
-    "apollo-client-preset": "^1.0.6",
-    "graphql": "^0.12.3",
-    "graphql-tag": "^2.6.1",
-    "react": "^16.2.0",
-    "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+	"name": "client",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"antd": "^3.1.6",
+		"apollo-client-preset": "^1.0.6",
+		"graphql": "^0.12.3",
+		"graphql-tag": "^2.6.1",
+		"react": "^16.2.0",
+		"react-apollo": "^2.0.4",
+		"react-dom": "^16.2.0",
+		"react-router-dom": "^4.2.2",
+		"react-scripts": "1.1.0"
+	},
+	"scripts": {
+		"postinstall": "ln -fsn ../ 'node_modules/>'",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	},
+	"devDependencies": {}
 }

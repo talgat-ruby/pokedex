@@ -9,7 +9,7 @@
 		"nodemon": "nodemon ./src --exec babel-node",
 		"prettier:build": "prettier --write build/**/*.{js,json}",
 		"postinstall": "ln -fsn ../ 'node_modules/>'",
-		"start": "NODE_ENV=development concurrently \"yarn nodemon\"",
+		"start": "NODE_ENV=development yarn nodemon",
 		"prebuild": "yarn clean",
 		"build": "NODE_ENV=production yarn babel && yarn prettier:build",
 		"postbuild": "node build/index.js",

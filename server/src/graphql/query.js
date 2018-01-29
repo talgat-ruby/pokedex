@@ -26,7 +26,7 @@ const query = new GraphQLObjectType({
 					return pokemons.map(
 						({id, name, sprites: {front_default}, types, stats}) => ({
 							id,
-							name,
+							name: `${name.charAt(0).toUpperCase()}${name.substring(1)}`,
 							avatar: front_default,
 							types: types.map(({type: {name}}) => name),
 							stats: stats.map(({stat: {name}, base_stat}) => ({

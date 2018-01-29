@@ -1,0 +1,29 @@
+.pokemon-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	grid-gap: 20px;
+	justify-content: space-between;
+}
+
+.pokemon .title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.pokemon .avatar {
+	width: 96px;
+	height: 96px;
+}
+
+.pokemon .types {
+	display: flex;
+	margin-top: 15px;
+}
+
+.pokemon .stats .stat {
+	flex: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

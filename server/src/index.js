@@ -7,9 +7,9 @@ require('dotenv').config();
 const Koa = require('koa');
 const Route = require('koa-router');
 const koaGraphQL = require('koa-graphql');
+const	cors = require('kcors');
 if (process.env.NODE_ENV === 'production') {
 	// Set up nginx
-	modulesProduction.cors = require('kcors');
 	modulesProduction.serve = require('koa-static');
 	modulesProduction.send = require('koa-send');
 }
@@ -24,6 +24,8 @@ const schema = require('./graphql/');
 const app = new Koa();
 const router = new Route();
 const P = new Pokedex();
+
+app.use(cors());
 
 router.all(
 	'/graphql',
@@ -45,7 +47,6 @@ router.all(
 app.use(router.routes()).use(router.allowedMethods());
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(modulesProduction.cors());
 	app.use(modulesProduction.serve(CLIENT_PATH));
 	app.use(async ctx => {
 		await modulesProduction.send(ctx, './index.html', {root: CLIENT_PATH});

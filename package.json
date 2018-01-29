@@ -1,18 +1,18 @@
 {
-  "name": "pokedex",
-  "version": "1.0.0",
-  "description": "Pokedex app build with GraphQl",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "react",
-    "graphql",
-    "pokedex",
-    "pokemon"
-  ],
-  "author": "Talgat Saribayev",
-  "license": "MIT",
-  "dependencies": {}
+	"name": "pokedex",
+	"version": "1.0.0",
+	"description": "Pokedex app build with GraphQl",
+	"main": "index.js",
+	"scripts": {
+		"start:client": "cd client/ && yarn start",
+		"start:server": "cd server/ && yarn start",
+		"start": "concurrently \"yarn start:server\" \"yarn start:client\""
+	},
+	"keywords": ["react", "graphql", "pokedex", "pokemon"],
+	"author": "Talgat Saribayev",
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {
+		"concurrently": "^3.5.1"
+	}
 }

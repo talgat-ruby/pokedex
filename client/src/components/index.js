@@ -8,11 +8,13 @@ class App extends Component {
 	render() {
 		return (
 			<div className="app">
-				<Switch>
-					<Redirect exact from="/" to="/pokemon-list" />
-					<Route exact path="/pokemon-list" component={PokemonList} />
-					<Route render={() => <div>404</div>} />
-				</Switch>
+				<main>
+					<Switch>
+						<Redirect exact from="/" to="/pokemon-list" />
+						<Route exact path="/pokemon-list" component={PokemonList} />
+						<Route render={() => <div>404</div>} />
+					</Switch>
+				</main>
 			</div>
 		);
 	}
