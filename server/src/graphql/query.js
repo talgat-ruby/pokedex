@@ -45,9 +45,7 @@ const query = new GraphQLObjectType({
 			type: new GraphQLList(GraphQLString),
 			resolve: async (_, __, {P}) => {
 				try {
-					return (await P.getTypesList()).results
-						.slice(0, -1)
-						.map(({name}) => name);
+					return (await P.getTypesList()).results.map(({name}) => name);
 				} catch (e) {
 					return Promise.reject(e);
 				}
