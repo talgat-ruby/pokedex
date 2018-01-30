@@ -1,4 +1,5 @@
 .app {
+	background-color: #eceff1;
 	display: grid;
 	grid-template-columns: 10% 1fr 10%;
 	grid-template-rows: 100px auto;

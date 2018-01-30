@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import './pokemon-list.css';
+import './pokemons-list.css';
 
 import {Card, List, Avatar, Tag} from 'antd';
 import {GraphqlContainer} from '>/src/components/lib';
 
-class PokemonList extends Component {
+class PokemonsList extends Component {
 	renderPokemon(pokemon) {
 		return (
 			<Card
@@ -47,7 +47,7 @@ class PokemonList extends Component {
 
 		return (
 			<GraphqlContainer loading={loading} error={error}>
-				<div className="pokemon-list">
+				<div className="pokemons-list">
 					{pokemons && pokemons.map(this.renderPokemon)}
 				</div>
 			</GraphqlContainer>
@@ -72,4 +72,4 @@ const MY_QUERY = gql`
 
 export default graphql(MY_QUERY, {
 	options: {variables: {limit: 5, offset: 10}}
-})(PokemonList);
+})(PokemonsList);

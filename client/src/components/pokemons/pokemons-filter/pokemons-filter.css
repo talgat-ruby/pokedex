@@ -1,0 +1,6 @@
+.pokemons-filter {
+	margin-bottom: 50px;
+	display: grid;
+	grid-template-columns: 142px 300px 300px;
+	justify-content: space-between;
+}

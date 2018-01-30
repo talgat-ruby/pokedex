@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import './index.css';
 
-import PokemonList from './pokemon-list/';
+// import Header from './header/';
+import Pokemons from './pokemons/';
 
 class App extends Component {
 	render() {
@@ -10,8 +11,8 @@ class App extends Component {
 			<div className="app">
 				<main>
 					<Switch>
-						<Redirect exact from="/" to="/pokemon-list" />
-						<Route exact path="/pokemon-list" component={PokemonList} />
+						<Redirect exact from="/" to="/pokemons" />
+						<Route exact path="/pokemons" component={Pokemons} />
 						<Route render={() => <div>404</div>} />
 					</Switch>
 				</main>
