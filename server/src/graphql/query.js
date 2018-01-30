@@ -59,21 +59,6 @@ const query = new GraphQLObjectType({
 				}
 			}
 		},
-		test: {
-			type: GraphQLString,
-			args: {
-				type: {type: new GraphQLNonNull(GraphQLString)}
-			},
-			resolve: async (_, {type}, {P}) => {
-				try {
-					const result = await P.getTypeByName(type);
-					console.log('\x1b[33m result -> \x1b[0m', result.pokemon);
-					return 'Hello';
-				} catch (e) {
-					console.log(e);
-				}
-			}
-		},
 		types: {
 			type: new GraphQLList(GraphQLString),
 			resolve: async (_, __, {P}) => {
