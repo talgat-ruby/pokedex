@@ -12,7 +12,7 @@
 		"start": "NODE_ENV=development yarn nodemon",
 		"prebuild": "yarn clean",
 		"build": "NODE_ENV=production yarn babel && yarn prettier:build",
-		"postbuild": "node build/index.js",
+		"start:build": "node build/index.js",
 		"test": "NODE_ENV=test jest --colors"
 	},
 	"author": "Talgat Saribayev",
