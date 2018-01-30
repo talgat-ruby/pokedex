@@ -7,7 +7,7 @@ require('dotenv').config();
 const Koa = require('koa');
 const Route = require('koa-router');
 const koaGraphQL = require('koa-graphql');
-const	cors = require('kcors');
+const cors = require('kcors');
 if (process.env.NODE_ENV === 'production') {
 	// Set up nginx
 	modulesProduction.serve = require('koa-static');

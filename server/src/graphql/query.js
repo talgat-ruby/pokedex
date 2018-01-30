@@ -2,7 +2,8 @@ const {
 	GraphQLNonNull,
 	GraphQLObjectType,
 	GraphQLList,
-	GraphQLInt
+	GraphQLInt,
+	GraphQLString
 } = require('graphql');
 
 const {PokemonType} = require('./types/');
@@ -16,7 +17,7 @@ const query = new GraphQLObjectType({
 				limit: {type: new GraphQLNonNull(GraphQLInt)},
 				offset: {type: new GraphQLNonNull(GraphQLInt)}
 			},
-			resolve: async (parentValue, {limit, offset}, {P}) => {
+			resolve: async (_, {limit, offset}, {P}) => {
 				try {
 					const promises = [];
 					for (let i = 0; i < limit + 1; i++) {
@@ -35,6 +36,18 @@ const query = new GraphQLObjectType({
 							}))
 						})
 					);
+				} catch (e) {
+					return Promise.reject(e);
+				}
+			}
+		},
+		types: {
+			type: new GraphQLList(GraphQLString),
+			resolve: async (_, __, {P}) => {
+				try {
+					return (await P.getTypesList()).results
+						.slice(0, -1)
+						.map(({name}) => name);
 				} catch (e) {
 					return Promise.reject(e);
 				}
