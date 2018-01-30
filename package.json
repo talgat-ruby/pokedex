@@ -9,8 +9,9 @@
 		"start": "concurrently \"yarn start:server\" \"yarn start:client\"",
 		"build:client": "cd client/ && yarn && yarn build",
 		"build:server": "cd server/ && yarn && yarn build",
-		"build": "yarn && yarn build:server && yarn build:client",
-		"postbuild": "cd server/ && yarn start:build"
+		"build":
+			"yarn && yarn build:server && concurrently \"yarn start:server\" \"yarn build:client\"",
+		"start:server": "cd server/ && yarn start:build"
 	},
 	"keywords": ["react", "graphql", "pokedex", "pokemon"],
 	"author": "Talgat Saribayev",
