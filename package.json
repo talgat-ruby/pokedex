@@ -9,14 +9,16 @@
 		"start": "concurrently \"yarn start:server\" \"yarn start:client\"",
 		"build:client": "cd client/ && yarn && yarn build",
 		"build:server": "cd server/ && yarn && yarn build",
-		"build": "yarn install && yarn build:server && yarn rest",
+		"build": "yarn install && yarn build:server && yarn need",
+		"need": "rimraf need/",
 		"rest": "concurrently \"yarn start:server\" \"yarn build:client\""
 	},
 	"keywords": ["react", "graphql", "pokedex", "pokemon"],
 	"author": "Talgat Saribayev",
 	"license": "MIT",
 	"dependencies": {
-		"concurrently": "^3.5.1"
+		"concurrently": "^3.5.1",
+		"rimraf": "^2.6.2"
 	},
 	"devDependencies": {}
 }
