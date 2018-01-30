@@ -6,26 +6,28 @@ const {
 	GraphQLString
 } = require('graphql');
 
-const {PokemonType} = require('./types/');
+const {PokemonsListType} = require('./types/');
 
 const query = new GraphQLObjectType({
 	name: 'RootQuery',
 	fields: {
-		pokemons: {
-			type: new GraphQLList(PokemonType),
+		pokemonsList: {
+			type: PokemonsListType,
 			args: {
 				limit: {type: new GraphQLNonNull(GraphQLInt)},
 				offset: {type: new GraphQLNonNull(GraphQLInt)}
 			},
 			resolve: async (_, {limit, offset}, {P}) => {
 				try {
-					const promises = [];
-					for (let i = 0; i < limit + 1; i++) {
-						promises.push(P.getPokemonByName(offset + i));
-					}
-					const pokemons = await Promise.all(promises);
-					return pokemons.map(
-						({id, name, sprites: {front_default}, types, stats}) => ({
+					const {count, results: list} = await P.getPokemonsList({
+						limit,
+						offset
+					});
+					const data = await Promise.all(
+						list.map(({name}) => P.getPokemonByName(name))
+					);
+					const pokemons = data.map(
+						({id, name, sprites: {front_default}, types, stats, ...rest}) => ({
 							id,
 							name: `${name.charAt(0).toUpperCase()}${name.substring(1)}`,
 							avatar: front_default,
@@ -36,6 +38,8 @@ const query = new GraphQLObjectType({
 							}))
 						})
 					);
+
+					return {count, pokemons};
 				} catch (e) {
 					return Promise.reject(e);
 				}
