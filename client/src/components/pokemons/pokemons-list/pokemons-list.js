@@ -43,7 +43,14 @@ class PokemonsList extends Component {
 	}
 
 	render() {
-		const {loading, error, pokemons} = this.props.data;
+		const {data: {loading, error, pokemons}} = this.props;
+
+		console.log(
+			'%c PokemonsList this.props ->',
+			'background-color:#222; color:gold;',
+			' ',
+			this.props
+		);
 
 		return (
 			<GraphqlContainer loading={loading} error={error}>
@@ -70,6 +77,10 @@ const QUERY = gql`
 	}
 `;
 
+const calcOffset = (page, pageSize) => (page - 1) * pageSize + 1;
+
 export default graphql(QUERY, {
-	options: {variables: {limit: 5, offset: 10}}
+	options: ({page, pageSize}) => ({
+		variables: {limit: pageSize - 1, offset: calcOffset(page, pageSize)}
+	})
 })(PokemonsList);

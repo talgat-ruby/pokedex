@@ -3,7 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import './index.css';
 
 // import Header from './header/';
-import Pokemons from './pokemons/';
+import Pokemons, {pageSizes} from './pokemons/';
 
 class App extends Component {
 	render() {
@@ -11,8 +11,22 @@ class App extends Component {
 			<div className="app">
 				<main>
 					<Switch>
-						<Redirect exact from="/" to="/pokemons" />
-						<Route exact path="/pokemons" component={Pokemons} />
+						<Redirect exact from="/" to={`/pokemons/${pageSizes[0]}/1`} />
+						<Redirect
+							exact
+							from="/pokemons"
+							to={`/pokemons/${pageSizes[0]}/1`}
+						/>
+						<Redirect
+							exact
+							from="/pokemons/:pageSize"
+							to={`/pokemons/${pageSizes[0]}/1`}
+						/>
+						<Route
+							exact
+							path="/pokemons/:pageSize/:page"
+							component={Pokemons}
+						/>
 						<Route render={() => <div>404</div>} />
 					</Switch>
 				</main>

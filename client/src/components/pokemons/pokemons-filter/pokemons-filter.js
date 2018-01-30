@@ -4,18 +4,26 @@ import './pokemons-filter.css';
 import {TreeSelect, Radio, Input} from 'antd';
 
 const PokemonsFilter = ({
+	pageSizes,
 	typesList,
 	pageSize,
 	types,
 	name,
 	typesChangeHandler,
-	changeHandler
+	nameChangeHandler,
+	pageSizeChangeHandler
 }) => (
 	<div className="pokemons-filter">
-		<Radio.Group value={pageSize} name="pageSize" onChange={changeHandler}>
-			<Radio.Button value={12}>12</Radio.Button>
-			<Radio.Button value={24}>24</Radio.Button>
-			<Radio.Button value={36}>36</Radio.Button>
+		<Radio.Group
+			value={pageSize}
+			name="pageSize"
+			onChange={pageSizeChangeHandler}
+		>
+			{pageSizes.map(p => (
+				<Radio.Button key={p} value={p}>
+					{p}
+				</Radio.Button>
+			))}
 		</Radio.Group>
 		<TreeSelect
 			showSearch
@@ -34,7 +42,7 @@ const PokemonsFilter = ({
 			placeholder="Pikachu"
 			value={name}
 			name="name"
-			onChange={changeHandler}
+			onChange={nameChangeHandler}
 		/>
 	</div>
 );
