@@ -1,5 +1,16 @@
 .pokemons-list {
 	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		'list'
+		'pagination';
+	grid-gap: 30px;
+}
+
+.pokemons-grid {
+	grid-area: list;
+	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 	grid-gap: 20px;
 	justify-content: space-between;
@@ -26,4 +37,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.pagination-container {
+	grid-area: pagination;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
 }

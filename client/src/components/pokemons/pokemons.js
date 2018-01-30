@@ -22,6 +22,9 @@ class Pokemons extends Component {
 
 	typesChangeHandler = types => this.setState({types});
 
+	pageChangeHandler = (page, pageSize) =>
+		this.props.history.push(`/pokemons/${pageSize}/${page}`);
+
 	render() {
 		const {
 			data: {loading, error, types: typesList},
@@ -53,7 +56,11 @@ class Pokemons extends Component {
 							nameChangeHandler={this.nameChangeHandler}
 							pageSizeChangeHandler={this.pageSizeChangeHandler}
 						/>
-						<PokemonsList pageSize={pageSize} page={page} />
+						<PokemonsList
+							pageSize={pageSize}
+							page={page}
+							pageChangeHandler={this.pageChangeHandler}
+						/>
 					</div>
 				)}
 			</GraphqlContainer>

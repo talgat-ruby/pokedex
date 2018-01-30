@@ -3,10 +3,13 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import './pokemons-list.css';
 
-import {Card, List, Avatar, Tag} from 'antd';
+import {Card, List, Avatar, Tag, Pagination} from 'antd';
 import {GraphqlContainer} from '>/src/components/lib';
 
 class PokemonsList extends Component {
+	log = (...args) =>
+		console.log('%c args ->', 'background-color:#222; color:gold;', ' ', args);
+
 	renderPokemon(pokemon) {
 		return (
 			<Card
@@ -43,7 +46,12 @@ class PokemonsList extends Component {
 	}
 
 	render() {
-		const {data: {loading, error, pokemons}} = this.props;
+		const {
+			page,
+			pageSize,
+			data: {loading, error, pokemonsList},
+			pageChangeHandler
+		} = this.props;
 
 		console.log(
 			'%c PokemonsList this.props ->',
@@ -54,24 +62,40 @@ class PokemonsList extends Component {
 
 		return (
 			<GraphqlContainer loading={loading} error={error}>
-				<div className="pokemons-list">
-					{pokemons && pokemons.map(this.renderPokemon)}
-				</div>
+				{pokemonsList && (
+					<div className="pokemons-list">
+						<div className="pokemons-grid">
+							{pokemonsList.pokemons.map(this.renderPokemon)}
+						</div>
+						<nav className="pagination-container">
+							<Pagination
+								className="pagination"
+								current={page}
+								onChange={pageChangeHandler}
+								total={pokemonsList.count}
+								pageSize={pageSize}
+							/>
+						</nav>
+					</div>
+				)}
 			</GraphqlContainer>
 		);
 	}
 }
 
 const QUERY = gql`
-	query Pokemons($limit: Int!, $offset: Int!) {
-		pokemons(limit: $limit, offset: $offset) {
-			id
-			name
-			avatar
-			types
-			stats {
+	query PokemonsList($limit: Int!, $offset: Int!) {
+		pokemonsList(limit: $limit, offset: $offset) {
+			count
+			pokemons {
+				id
 				name
-				baseStat
+				avatar
+				types
+				stats {
+					name
+					baseStat
+				}
 			}
 		}
 	}
