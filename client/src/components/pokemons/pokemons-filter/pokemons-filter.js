@@ -7,9 +7,9 @@ const PokemonsFilter = ({
 	pageSizes,
 	typesList,
 	pageSize,
-	types,
+	type,
 	name,
-	typesChangeHandler,
+	typeChangeHandler,
 	nameChangeHandler,
 	pageSizeChangeHandler
 }) => (
@@ -28,13 +28,12 @@ const PokemonsFilter = ({
 		<TreeSelect
 			showSearch
 			style={{width: 300}}
-			value={types}
+			value={type}
 			dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
 			placeholder="fire"
 			allowClear
-			multiple
 			treeDefaultExpandAll
-			onChange={typesChangeHandler}
+			onChange={typeChangeHandler}
 		>
 			{typesList.map(t => <TreeSelect.TreeNode value={t} title={t} key={t} />)}
 		</TreeSelect>

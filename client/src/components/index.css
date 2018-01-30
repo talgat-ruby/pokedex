@@ -1,9 +1,10 @@
 .app {
+	min-height: 100vh;
 	background-color: #eceff1;
 	padding-bottom: 100px;
 	display: grid;
 	grid-template-columns: 10% 1fr 10%;
-	grid-template-rows: 100px auto;
+	grid-template-rows: 50px auto;
 	grid-template-areas:
 		'header header header'
 		'.      main   .';

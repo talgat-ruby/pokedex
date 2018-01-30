@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import './index.css';
 
-// import Header from './header/';
 import Pokemons, {pageSizes} from './pokemons/';
 
 class App extends Component {

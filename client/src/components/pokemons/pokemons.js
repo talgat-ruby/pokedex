@@ -10,30 +10,67 @@ import PokemonsFilter from './pokemons-filter/';
 import PokemonsList from './pokemons-list/';
 
 class Pokemons extends Component {
-	state = {
-		types: [],
-		name: ''
-	};
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			name: ''
+		};
+
+		this.setPage(props.match.params.page);
+		this.setPageSize(props.match.params.pageSize);
+		this.setType(props.location.search);
+	}
+
+	componentWillReceiveProps({match: {params: {page, pageSize}}, location}) {
+		if (this.props.match.params.page !== page) {
+			this.setPage(page);
+		}
+
+		if (this.props.match.params.pageSize !== pageSize) {
+			this.setPageSize(pageSize);
+		}
+
+		if (this.props.location.search !== location.search) {
+			this.setType(location.search);
+		}
+	}
+
+	setPage(page) {
+		this.page = Number.parseInt(page, 10);
+	}
+
+	setPageSize(pageSize) {
+		this.pageSize = Number.parseInt(pageSize, 10);
+	}
+
+	setType(search) {
+		const searchParams = new URLSearchParams(search);
+		this.type = searchParams.get('type') || '';
+	}
 
 	nameChangeHandler = ({target: {value}}) => this.setState({name: value});
 
 	pageSizeChangeHandler = ({target: {value}}) =>
 		this.props.history.push(`/pokemons/${value}/1`);
 
-	typesChangeHandler = types => this.setState({types});
+	typeChangeHandler = type => {
+		const {history, location: {pathname}} = this.props;
+		if (type) {
+			history.push({pathname, search: `?type=${type}`});
+		} else {
+			history.push(pathname);
+		}
+	};
 
-	pageChangeHandler = (page, pageSize) =>
-		this.props.history.push(`/pokemons/${pageSize}/${page}`);
+	pageChangeHandler = (page, pageSize) => {
+		const {history, location: {search}} = this.props;
+		history.push({pathname: `/pokemons/${pageSize}/${page}`, search});
+	};
 
 	render() {
-		const {
-			data: {loading, error, types: typesList},
-			match: {params}
-		} = this.props;
-		const {types, name} = this.state;
-
-		const pageSize = Number.parseInt(params.pageSize, 10);
-		const page = Number.parseInt(params.page, 10);
+		const {loading, error, types: typesList} = this.props.data;
+		const {name} = this.state;
 
 		console.log(
 			'%c Pokemons this.props ->',
@@ -49,16 +86,17 @@ class Pokemons extends Component {
 						<PokemonsFilter
 							pageSizes={pageSizes}
 							typesList={typesList}
-							pageSize={pageSize}
-							types={types}
+							pageSize={this.pageSize}
+							type={this.type}
 							name={name}
-							typesChangeHandler={this.typesChangeHandler}
+							typeChangeHandler={this.typeChangeHandler}
 							nameChangeHandler={this.nameChangeHandler}
 							pageSizeChangeHandler={this.pageSizeChangeHandler}
 						/>
 						<PokemonsList
-							pageSize={pageSize}
-							page={page}
+							pageSize={this.pageSize}
+							page={this.page}
+							type={this.type}
 							pageChangeHandler={this.pageChangeHandler}
 						/>
 					</div>

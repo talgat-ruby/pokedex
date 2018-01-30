@@ -68,8 +68,8 @@ const PokemonsList = ({
 };
 
 const QUERY = gql`
-	query PokemonsList($limit: Int!, $offset: Int!) {
-		pokemonsList(limit: $limit, offset: $offset) {
+	query PokemonsList($limit: Int!, $offset: Int!, $type: String) {
+		pokemonsList(limit: $limit, offset: $offset, type: $type) {
 			count
 			pokemons {
 				id
@@ -88,7 +88,7 @@ const QUERY = gql`
 const calcOffset = (page, pageSize) => (page - 1) * pageSize + 1;
 
 export default graphql(QUERY, {
-	options: ({page, pageSize}) => ({
-		variables: {limit: pageSize - 1, offset: calcOffset(page, pageSize)}
+	options: ({page, pageSize, type}) => ({
+		variables: {limit: pageSize - 1, offset: calcOffset(page, pageSize), type}
 	})
 })(PokemonsList);
