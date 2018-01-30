@@ -23,7 +23,9 @@ const schema = require('./graphql/');
 
 const app = new Koa();
 const router = new Route();
-const P = new Pokedex();
+
+const pokedexOptions = {timeout: 50 * 1000}; //50s
+const P = new Pokedex(pokedexOptions);
 
 app.use(cors());
 

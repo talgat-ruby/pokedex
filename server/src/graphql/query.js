@@ -15,17 +15,31 @@ const query = new GraphQLObjectType({
 			type: PokemonsListType,
 			args: {
 				limit: {type: new GraphQLNonNull(GraphQLInt)},
-				offset: {type: new GraphQLNonNull(GraphQLInt)}
+				offset: {type: new GraphQLNonNull(GraphQLInt)},
+				type: {type: GraphQLString}
 			},
-			resolve: async (_, {limit, offset}, {P}) => {
+			resolve: async (_, {limit, offset, type}, {P}) => {
 				try {
-					const {count, results: list} = await P.getPokemonsList({
-						limit,
-						offset
-					});
-					const data = await Promise.all(
-						list.map(({name}) => P.getPokemonByName(name))
-					);
+					let count, promises;
+
+					if (type) {
+						const {pokemon} = await P.getTypeByName(type);
+						count = pokemon.length;
+						promises = pokemon
+							.slice(offset - 1, offset + limit)
+							.map(({pokemon: {name}}) => P.getPokemonByName(name));
+					} else {
+						const response = await P.getPokemonsList({
+							limit,
+							offset
+						});
+						count = response.count;
+						promises = response.results.map(({name}) =>
+							P.getPokemonByName(name)
+						);
+					}
+
+					const data = await Promise.all(promises);
 					const pokemons = data.map(
 						({id, name, sprites: {front_default}, types, stats, ...rest}) => ({
 							id,
@@ -42,6 +56,21 @@ const query = new GraphQLObjectType({
 					return {count, pokemons};
 				} catch (e) {
 					return Promise.reject(e);
+				}
+			}
+		},
+		test: {
+			type: GraphQLString,
+			args: {
+				type: {type: new GraphQLNonNull(GraphQLString)}
+			},
+			resolve: async (_, {type}, {P}) => {
+				try {
+					const result = await P.getTypeByName(type);
+					console.log('\x1b[33m result -> \x1b[0m', result.pokemon);
+					return 'Hello';
+				} catch (e) {
+					console.log(e);
 				}
 			}
 		},
