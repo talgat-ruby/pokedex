@@ -9,7 +9,7 @@
 		"start": "concurrently \"yarn start:server\" \"yarn start:client\"",
 		"build:client": "cd client/ && yarn && yarn build",
 		"build:server": "cd server/ && yarn && yarn build",
-		"build": "yarn install && yarn build:server && yarn need",
+		"build": "yarn install && yarn build:server && yarn rest",
 		"need": "rimraf need/",
 		"rest": "concurrently \"yarn start:server\" \"yarn build:client\""
 	},
