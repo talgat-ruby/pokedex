@@ -55,7 +55,7 @@ class PokemonsList extends Component {
 	}
 }
 
-const MY_QUERY = gql`
+const QUERY = gql`
 	query Pokemons($limit: Int!, $offset: Int!) {
 		pokemons(limit: $limit, offset: $offset) {
 			id
@@ -70,6 +70,6 @@ const MY_QUERY = gql`
 	}
 `;
 
-export default graphql(MY_QUERY, {
+export default graphql(QUERY, {
 	options: {variables: {limit: 5, offset: 10}}
 })(PokemonsList);
