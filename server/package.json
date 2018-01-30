@@ -18,6 +18,12 @@
 	"author": "Talgat Saribayev",
 	"license": "MIT",
 	"dependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.0",
+		"babel-plugin-minify-dead-code-elimination": "^0.2.0",
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-node-env-inline": "^0.2.0",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"dotenv": "^4.0.0",
 		"graphql": "^0.12.3",
 		"kcors": "^2.2.1",
@@ -31,15 +37,10 @@
 		"passport-facebook": "^2.1.1",
 		"passport-twitter": "^1.0.4",
 		"pokedex-promise-v2": "^3.1.1",
+		"prettier": "^1.10.2",
 		"rimraf": "^2.6.2"
 	},
 	"devDependencies": {
-		"babel-cli": "^6.26.0",
-		"babel-core": "^6.26.0",
-		"babel-plugin-minify-dead-code-elimination": "^0.2.0",
-		"babel-plugin-transform-class-properties": "^6.24.1",
-		"babel-plugin-transform-node-env-inline": "^0.2.0",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"chalk": "^2.3.0",
 		"concurrently": "^3.5.1",
 		"eslint-config-prettier": "^2.9.0",
@@ -50,8 +51,7 @@
 		"eslint-plugin-promise": "^3.6.0",
 		"eslint-plugin-standard": "^3.0.1",
 		"jest": "^22.1.4",
-		"nodemon": "^1.14.11",
-		"prettier": "^1.10.2"
+		"nodemon": "^1.14.11"
 	},
 	"engines": {
 		"node": ">=8.1.4",
