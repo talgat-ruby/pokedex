@@ -72,13 +72,6 @@ class Pokemons extends Component {
 		const {loading, error, types: typesList} = this.props.data;
 		const {name} = this.state;
 
-		console.log(
-			'%c Pokemons this.props ->',
-			'background-color:#222; color:gold;',
-			' ',
-			this.props
-		);
-
 		return (
 			<GraphqlContainer loading={loading} error={error}>
 				{typesList && (
